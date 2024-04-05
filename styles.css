@@ -1,0 +1,28 @@
+body {
+    background-color: #121212; /* Color de fondo oscuro */
+    color: white; /* Texto blanco */
+    font-family: Arial, sans-serif;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background-color: #1f1f1f; /* Color de fondo de la tarjeta */
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra de la tarjeta */
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 5px;
+}

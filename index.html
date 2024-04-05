@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Viewer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Imágenes convertidas a base64</h1>
-    <div>
+    <h1>Pixel-Icon</h1>
+    <div class="card-container">
         {{ range . }}
-            <h2>{{ .filename }}</h2>
-            <img src="data:image/jpeg;base64,{{ .base64 }}" alt="{{ .filename }}">
+            <div class="card">
+                <h2>{{ .filename }}</h2>
+                <img src="data:image/jpeg;base64,{{ .base64 }}" alt="{{ .filename }}">
+            </div>
         {{ end }}
     </div>
 </body>
