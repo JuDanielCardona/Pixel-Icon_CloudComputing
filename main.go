@@ -2,19 +2,23 @@ package main
 
 import (
 	"encoding/base64"
-	"fmt"
-	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 	"time"
 )
 
 // Ruta del directorio de imágenes
 const IMAGES_DIRECTORY = "sources"
+
+type PageData struct {
+	Images   []map[string]string
+	Hostname string
+}
 
 func main() {
 	http.HandleFunc("/", indexHandler)
@@ -23,7 +27,7 @@ func main() {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Lista para almacenar las imágenes seleccionadas al azar y convertidas a base64
-	random_images := []map[string]string{}
+	randomImages := []map[string]string{}
 
 	// Obtener lista de imágenes del directorio
 	images, err := getImagesList(IMAGES_DIRECTORY)
@@ -38,29 +42,36 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Seleccionar 4 imágenes al azar
 	for _, idx := range rand.Perm(len(images))[:4] {
-		imageBytes, err := ioutil.ReadFile(images[idx])
+		imageBytes, err := os.ReadFile(images[idx])
 		if err != nil {
 			log.Printf("Error al leer la imagen %s: %s\n", images[idx], err)
 			continue
 		}
 		imageBase64 := base64.StdEncoding.EncodeToString(imageBytes)
-		random_images = append(random_images, map[string]string{
-			"filename": images[idx],
+		// Obtener solo el nombre del archivo sin la extensión ni la ruta
+		filename := filepath.Base(images[idx])
+		filename = strings.TrimSuffix(filename, filepath.Ext(filename))
+		randomImages = append(randomImages, map[string]string{
+			"filename": filename,
 			"base64":   imageBase64,
 		})
 	}
 
-	// Renderizar la plantilla y pasarle los datos de las imágenes seleccionadas al azar
-	renderTemplate(w, "index", random_images)
-
-	// Obtener y mostrar el nombre del host y la dirección IP
+	// Obtener el nombre del host
 	hostname, err := os.Hostname()
 	if err != nil {
 		log.Println("Error al obtener el nombre del host:", err)
 		return
 	}
-	fmt.Fprintf(w, "Nombre del host: %s\n", hostname)
-	fmt.Fprintf(w, "Dirección IP: %s\n", r.RemoteAddr)
+
+	// Datos de la página a pasar a la plantilla
+	data := PageData{
+		Images:   randomImages,
+		Hostname: hostname,
+	}
+
+	// Renderizar la plantilla y pasarle los datos de las imágenes seleccionadas al azar y el nombre del host
+	renderTemplate(w, "index", data)
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
