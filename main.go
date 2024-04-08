@@ -17,8 +17,13 @@ import (
 const IMAGES_DIRECTORY = "sources"
 
 func main() {
+	
+	// Manejador para archivos estáticos en el directorio 'static'
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	
 	http.HandleFunc("/", indexHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8082", nil))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {

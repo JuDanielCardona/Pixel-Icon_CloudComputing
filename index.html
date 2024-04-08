@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Viewer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/gif.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Pixel-Icon</h1>
-    <div class="card-container">
-        {{ range . }}
+    <div class="text-center"> <!-- Contenedor centrado -->
+        <h1 class="my-4">Pixel-Icon</h1>
+        <div class="card-container">
+            {{ range . }}
             <div class="card">
                 <h2>{{ .filename }}</h2>
                 <img src="data:image/jpeg;base64,{{ .base64 }}" alt="{{ .filename }}">
             </div>
-        {{ end }}
+            {{ end }}
+        </div>
     </div>
+    <div class="film"></div>
 </body>
 </html>

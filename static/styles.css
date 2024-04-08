@@ -1,0 +1,55 @@
+:root {
+  --color1: #CB1F5A;
+  --color2: #36CACC;
+  --color3: #D3CACE;
+  --color4: #21303B;
+  --color5: #327987;
+}
+
+
+
+body {
+  background-color: var(--color4);
+  color: var(--color3);
+  font-family: 'Arial', sans-serif;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--color2);
+  padding: 15px;
+  width: calc(100% - 30px);
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  color: var(--color1);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.host-info {
+  color: var(--color5);
+  margin-top: 2rem;
+}
