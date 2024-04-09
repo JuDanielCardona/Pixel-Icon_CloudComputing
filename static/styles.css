@@ -40,7 +40,10 @@
     max-width: 300px;
     border-radius: 8px;
     margin-bottom: 20px;
+    
   }
+
+
   
   .card h2 {
     color: var(--color1);
@@ -215,10 +218,4 @@ body {
     overflow: hidden;
 }
 
-.card {
-    width: calc(50% - 10px);
-    height: 170PX;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
+
