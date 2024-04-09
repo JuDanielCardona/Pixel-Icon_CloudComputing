@@ -13,7 +13,7 @@ import (
 )
 
 // Ruta del directorio de imágenes
-const IMAGES_DIRECTORY = "sources"
+const IMAGES_DIRECTORY = "images"
 
 type PageData struct {
 	Images   []map[string]string
@@ -21,6 +21,11 @@ type PageData struct {
 }
 
 func main() {
+
+	// Manejador para archivos estáticos en el directorio 'static'
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.HandleFunc("/", indexHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
