@@ -19,14 +19,17 @@
   }
   
   .text-center {
+    margin: 0 auto;
     text-align: center;
   }
   
   .card-container {
-    display: flex;
+    margin: 0;
+    height: auto; /* En lugar de 100vh, para permitir que la altura sea determinada por el contenido */
+    display: flex; /* Utilizar flexbox en lugar de grid */
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 20px; /* No se aplica en flexbox, puedes utilizar márgenes en los elementos hijos o `gap` en un contenedor flex */
     padding: 20px;
   }
   
@@ -91,6 +94,7 @@ button {
 header {
     margin: 0px;
     background-color: #003049;
+    
 }
 
 header .logo {
