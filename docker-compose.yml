@@ -1,0 +1,8 @@
+version: '3.8'  
+
+services:
+  pixel_icon_app:
+    image: pasb/mi_repo_pixel:latest  
+    ports:
+      - "4008:4008"  
+    restart: unless-stopped  

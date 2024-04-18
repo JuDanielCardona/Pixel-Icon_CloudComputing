@@ -23,7 +23,7 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	
 	http.HandleFunc("/", indexHandler)
-	log.Fatal(http.ListenAndServe(":8082", nil))
+	log.Fatal(http.ListenAndServe(":4008", nil))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
